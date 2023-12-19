@@ -10,17 +10,17 @@ const App = () => {
   
  useEffect(()=>{
  const interval= setInterval(()=>{
-  if(!pause) {
-      if (count> 0) {
+  if(!pause&&count> 0) {
+      
     setCount(count-1);
         } 
-      }
+      
   },1000);
  
  
 return()=>clearInterval(interval);
 
-},);
+},[count,pause]);
 const handlePauseToggle = () => {
   setPause(!pause);
 }
@@ -28,6 +28,7 @@ const handlePauseToggle = () => {
 const cancel=()=>{
   clearInterval(setCount(60))
 }
+const progress=(count/60)*100;
   return (
    
     
@@ -44,13 +45,13 @@ const cancel=()=>{
       <AnimatedCircularProgress
   size={190}
   width={8}
- fill={count}
+ fill={progress}
   tintColor="green"
   rotation={360}
  
   backgroundColor="white">
   {
-    (fill) => (
+    () => (
      
   
      
